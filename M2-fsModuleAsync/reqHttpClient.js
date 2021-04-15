@@ -1,13 +1,13 @@
 var http = require('http');
 
-//menentukan property options yang akan digunakan
+//membuat property options yang akan digunakan nantinya
 var options = {
-  hostname: 'www.google.com',
+  hostname: 'www.shopee.com',
   port: 80,
   path: '/',
   method: 'GET',
 
-  //header digunakan untuk menentukan tipe header yang digunakan seperti tipe konten dll.
+  //Tipe header yang diingikan  yaitu tipe content json
   headers: {
     'Content-Type': 'application/json',
   },
