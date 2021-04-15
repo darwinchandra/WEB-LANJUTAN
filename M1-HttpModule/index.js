@@ -1,15 +1,17 @@
 const http = require('http');
 
-//buat object server dengan listen port 3000
+//buat object server dengan listen port 3400
 http
   .createServer(function (req, res) {
-    //http Header
+    //http Header dengan status code 200 yang artinya OK
     res.writeHead(200, { 'Content-Type': 'text/html' });
 
-    //Respon ke browser / client
-    res.write('<H1>Module HTTP Mobile and Web</H1>');
+    //Respon ke browser / client berisi pesan html
+    res.write('<H1>Ini adalah pesan dengan HTML </H1>');
 
     //Respon diakhiri
     res.end();
   })
   .listen(3400);
+
+  
