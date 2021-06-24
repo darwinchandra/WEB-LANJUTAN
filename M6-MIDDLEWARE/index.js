@@ -1,23 +1,24 @@
-var express = require("express");
+var express = require('express');
 var app = express();
-var bodyParser = require("body-parser");
+var bodyParser = require('body-parser');
 
 //https://github.com/expressjs/morgan
-var logger = require("morgan");
+var logger = require('morgan');
 
 //Module morgan merupakan modul untuk logger yang berfungsi untuk pencatatan tiap request ke server. Pencatatan ini atau istilahnya logging akan ditunjukkan di console terminal.
 //Middleware package
-app.use(logger("dev"));
+app.use(logger('dev'));
 
-//Middleware cek nim
+//Middleware cek idpustakawan
 const myMiddleware = (req, res, next) => {
-  if (req.params.nim === "123") {
-    console.log("Nim terverifikasi");
+  if (req.params.idpustakawan === 'Pustakawan123') {
+    console.log('idpustakawan terverifikasi');
     next();
   } else {
     const err = {
-      status: "error",
-      data: {        nim: req.params.nim,
+      status: 'error',
+      data: {
+        idpustakawan: req.params.idpustakawan,
       },
     };
     next(err);
@@ -25,10 +26,10 @@ const myMiddleware = (req, res, next) => {
 };
 
 //route dengan method get
-app.get("/api/:nim/:nama", myMiddleware, function (req, res) {
+app.get('/api/:idpustakawan/:password', myMiddleware, function (req, res) {
   res.statusCode = 200;
   //content-type pada expressjs
-  res.setHeader("Content-Type", "text/plain");
+  res.setHeader('Content-Type', 'text/plain');
   res.send(req.params);
 });
 
@@ -38,5 +39,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(4000, function () {
-  console.log("Server run");
+  console.log('Server run');
 });
