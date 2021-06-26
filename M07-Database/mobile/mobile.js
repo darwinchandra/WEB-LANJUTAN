@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const perpusRoutes = require("./routes/perpus");
+const apotekerRoutes = require("./routes/apoteker");
+
+
 
 // Router yang digunakan
-router.use("/perpus", perpusRoutes);
+router.use("/apoteker", apotekerRoutes);
 module.exports = router;

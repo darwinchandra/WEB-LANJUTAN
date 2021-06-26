@@ -1,11 +1,12 @@
 const conn = require("./db");
 const async = require("async");
-exports.cariBuku = (req, res, next) => {
+exports.cariObat = (req, res, next) => {
   var id = req.params.id;
 
-  let query = "select * from tbl_buku where id = ?";
+  let query = "select * from tbl_obat";
 
-  connMhs.query(query, [id], (err, rows) => {
+  conn.query(query, [id], (err, rows) => {
+    
     if (err) {
       return res.status(400).send({
         message: "Failed when query data",
@@ -24,7 +25,7 @@ exports.cariBuku = (req, res, next) => {
   });
 };
 
-exports.tambahBuku = (req, res, next) => {
+exports.tambahObat = (req, res, next) => {
   let nama = req.body.nama; //body.nama; nama sesuai dengan body yang dikirim dari client
   let deskripsi = req.body.deskripsi;
   let harga = req.body.harga;
@@ -32,9 +33,9 @@ exports.tambahBuku = (req, res, next) => {
   var data = {
     nama: nama, //"nama" : nama, nama dalam kutip disesuaikan dengan nama field (kolom) dari tabel
     deskripsi: deskripsi,
-    harga: wa,
+    harga: harga,
   };
-  let sql = "insert into tbl_buku set ?";
+  let sql = "insert into tbl_obat value (?)";
 
   conn.query(sql, data, (err, rows) => {
     if (err) {
@@ -49,13 +50,13 @@ exports.tambahBuku = (req, res, next) => {
   });
 };
 
-exports.updateBuku = (req, res) => {
+exports.updateObat = (req, res) => {
   var id = req.params.id;
   let nama = req.body.nama;
   let deskripsi = req.body.deskripsi;
   let harga = req.body.harga;
 
-  var sql = "UPDATE tbl_buku SET nama=?, deskripsi= ?, harga= ? WHERE id= ?";
+  var sql = "UPDATE tbl_obat SET nama=?, deskripsi= ?, harga= ? WHERE id= ?";
 
   // params dalam kurung siku "[]", diurutkan sesuai dengan tanda tanya pada query di atas.
   conn.query(sql, [nama, deskripsi, harga, id], (err, result) => {
@@ -70,3 +71,22 @@ exports.updateBuku = (req, res) => {
     }
   });
 };
+exports.hapusObat = (req, res) => {
+  var id = req.params.id;
+
+  var sql = "DELETE FROM tbl_obat WHERE id=?";
+
+  // params dalam kurung siku "[]", diurutkan sesuai dengan tanda tanya pada query di atas.
+  conn.query(sql, [id], (err, result) => {
+    if (err) {
+      return res.status(400).send({
+        status: 400,
+      });
+    } else {
+      return res.status(200).send({
+        status: 200,
+      });
+    }
+  });
+};
+
