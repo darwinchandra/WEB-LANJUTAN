@@ -27,13 +27,11 @@ exports.cariObat = (req, res, next) => {
 
 exports.tambahObat = (req, res, next) => {
   let nama = req.body.nama; //body.nama; nama sesuai dengan body yang dikirim dari client
-  let deskripsi = req.body.deskripsi;
-  let harga = req.body.harga;
+  let keterangan = req.body.keterangan;
 
   var data = {
     nama: nama, //"nama" : nama, nama dalam kutip disesuaikan dengan nama field (kolom) dari tabel
-    deskripsi: deskripsi,
-    harga: harga,
+    keterangan: keterangan
   };
   let sql = "insert into tbl_obat value (?)";
 
@@ -53,13 +51,12 @@ exports.tambahObat = (req, res, next) => {
 exports.updateObat = (req, res) => {
   var id = req.params.id;
   let nama = req.body.nama;
-  let deskripsi = req.body.deskripsi;
-  let harga = req.body.harga;
+  let keterangan = req.body.keterangan;
 
-  var sql = "UPDATE tbl_obat SET nama=?, deskripsi= ?, harga= ? WHERE id= ?";
+  var sql = "UPDATE tbl_obat SET nama=?, keterangan= ? WHERE id= ?";
 
   // params dalam kurung siku "[]", diurutkan sesuai dengan tanda tanya pada query di atas.
-  conn.query(sql, [nama, deskripsi, harga, id], (err, result) => {
+  conn.query(sql, [nama, keterangan, harga, id], (err, result) => {
     if (err) {
       return res.status(400).send({
         status: 400,
